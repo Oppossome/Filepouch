@@ -3,18 +3,6 @@ const util = require('../util.js');
 const express = require('express');
 const router = express.Router();
 
-
-
-router.get('/', (req, res) => {
-	if(req.user && req.user.admin) {
-		db.User.findOne().then((users) => {
-			res.json(users);
-		})
-	} else {
-		res.status(401).send();
-	}
-})
-
 router.get('/:id', (req, res) => {
 	util.getRequestedUser(req).then(user => {
 		if(!user) return res.json({err: 'User not found!'});
@@ -25,19 +13,19 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/:id/:action', (req, res) => {
-	if(req.user && req.user.admin) {
-		util.getRequestedUser(req).then(user => {
-			if(req.params.action === 'TOGGLE_APPROVAL'){
-				user.isUserApproved = !user.isUserApproved;
-				user.save();
-			}else if(req.params.action === 'BAN_USER') {
-				user.isUserBanned = !user.isUserBanned;
-				user.save();
-			}
+	util.getRequestedUser(req).then(user => {
+		if(!user.canModerate(req)) return res.json({err: 'Insufficient permissions'});
 
-			return res.json(user.giveUserData(req));
-		})
-	}
+		if(req.params.action === 'TOGGLE_APPROVAL'){
+			user.isUserApproved = !user.isUserApproved;
+			user.save();
+		}else if(req.params.action === 'BAN_USER') {
+			user.isUserBanned = !user.isUserBanned;
+			user.save();
+		}
+
+		return res.json(user.giveUserData(req));
+	})
 })
 
 router.get('/files/:id/:page?', (req, res) => {

@@ -177,7 +177,6 @@ export default function Userpage(props) {
 		let isSelf = thisUser.hasOwnProperty("uploadToken");
 		let joinDate = globals.makeDateGood(thisUser.date);
 		let gridTitle = gridImages.length > 0 ? thisUser.username+"'s Uploads" : thisUser.username+" has no uploads";
-		let isUserAdmin = currentUser.hasOwnProperty("admin") && currentUser.admin;
 		let endPoint = `/api/users/files/${thisUser.id}`;
 
 		return (<>
@@ -191,7 +190,7 @@ export default function Userpage(props) {
 				{isSelf && <TokenHolder User={thisUser}/>}
 			</div>
 
-			{(isUserAdmin && !isSelf) && <AdminPanel TargetUser={[thisUser, setThisUser]}/>}
+			{(thisUser.canModerate) && <AdminPanel TargetUser={[thisUser, setThisUser]}/>}
 			{isSelf && <FileDropzone gridImages={[gridImages, setGridImages]}/>}
 			<ImageGrid Title={gridTitle} Endpoint={endPoint} GridImages={[gridImages, setGridImages]}/>
 		</>)

@@ -66,15 +66,16 @@ const userSchema = new mongoose.Schema({
 
 userSchema.methods.giveUserData = function(req) {
 	let isUserApproved = (process.env.REQUIRE_ACCOUNT_APPROVAL == "false" || this.admin || this.isUserApproved);
-	let isSameUser = (req.user && req.user._id == this._id);
+	let isSameUser = (req.user && req.user._id.equals(this._id));
 
 	return util.conditonalCombine(isSameUser, {
+		canModerate: this.canModerate(req),
 		isUserBanned: this.isUserBanned,
 		isUserApproved: isUserApproved,
+
 		username: this.displayName,
 		date: this.date,
 		id: this._id
-
 	}, {
 		uploadToken: this.uploadToken,
 		admin: this.admin
@@ -82,8 +83,20 @@ userSchema.methods.giveUserData = function(req) {
 	})
 }
 
+userSchema.methods.canModerate = function(req) {
+	if(req.user && req.user.admin) {
+		if(this.admin && req.user.discordId !== process.env.DISCORD_OWNER_ID) {
+			return false;
+		} else if(this._id.equals(req.user._id)){
+			return false;
+		}
+
+		return true;
+	}
+}
+
 userSchema.methods.canUserUpload = function() {
-	let isUserApproved = (process.env.REQUIRE_ACCOUNT_APPROVAL == "false" || this.admin || this.isUserApproved);
+	let isUserApproved = (process.env.REQUIRE_ACCOUNT_APPROVAL === "false" || this.admin || this.isUserApproved);
 	return (!this.isUserBanned && isUserApproved);
 }
 
@@ -122,12 +135,11 @@ const fileSchema = new mongoose.Schema({
 });
 
 fileSchema.methods.giveUserData = function(req) {
-	let userData = this.postedBy.giveUserData({});
-	let hasPower = (req.user && (req.user.admin || req.user._id.equals(userData._id)));
+	let canDeleteFile = (req.user && (this.postedBy.canModerate(req) || req.user._id.equals(this.postedBy._id)));
 
 	return {
-		postedBy: userData,
-		canDelete: hasPower,
+		postedBy: this.postedBy.giveUserData({}),
+		canDelete: canDeleteFile,
 		fileName: this.fileName,
 		views: this.views,
 		date: this.date
