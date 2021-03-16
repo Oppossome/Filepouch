@@ -191,7 +191,7 @@ export default function Userpage(props) {
 				{isSelf && <TokenHolder User={thisUser}/>}
 			</div>
 
-			{isUserAdmin && <AdminPanel TargetUser={[thisUser, setThisUser]}/>}
+			{(isUserAdmin && !isSelf) && <AdminPanel TargetUser={[thisUser, setThisUser]}/>}
 			{isSelf && <FileDropzone gridImages={[gridImages, setGridImages]}/>}
 			<ImageGrid Title={gridTitle} Endpoint={endPoint} GridImages={[gridImages, setGridImages]}/>
 		</>)
