@@ -1,0 +1,14 @@
+.textlogo {
+	font-weight: 300;
+	font-size: 1.5rem;
+	margin: .35em 0em;
+}
+
+.textlogo span {
+	background: conic-gradient(at 125% 50%, #b78cf7, #ff7c94, #ffcf0d, #ff7c94, #b78cf7);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	font-style: italic;
+	padding-right: .5em;
+}

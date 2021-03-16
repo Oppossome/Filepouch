@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+/*Imagegrid
+====================*/
+
+@media (min-width: 768px) {
+	.images {
+		grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));
+	}
+}
+
+.images {
+	display: grid;
+	grid-gap: 1em;
+	grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+}
+
+/*Image entry
+====================*/
+
+.image-entry {
+	box-shadow: 0px 0px 10px var(--body-interior-color);
+	background-color: var(--body-interior-color);
+	border: .2rem solid var(--body-interior-color);
+	border-radius: .5em;
+	overflow: hidden;
+	font-family: Roboto, sans-serif;
+}
+
+.image-entry h3 {
+	text-align: center;
+	font-size: 1rem;
+	padding: .2em;
+	opacity: .75;
+	font-weight: 300;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.extended-info {
+	display: flex;
+	flex-direction: row;
+	font-weight: 300;
+	justify-content: space-between;
+	padding: .2em .5em .4em .5em;
+	opacity: .5;
+}
+
+.img {
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 100%;
+}
+
+.img:after {
+	content: "";
+	display: block;
+	padding-bottom: 100%;
+}
+
+.entry-popin {
+	animation: entry-popin .5s ease-in-out 0s;
+}
+
+@keyframes entry-popin {
+	0% {
+		transform: scale(.5);
+		opacity: 0;
+	}
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+/*Loading
+====================*/
+
+.imgGrid-Loading {
+	text-align: center;
+	font-weight: 300;
+	padding: 3rem 0 2rem 0;
+}
+
+.imgGrid-Loading>span {
+	animation-name: periodBounce;
+	animation-iteration-count: infinite;
+	animation-duration: 2s;
+	display: inline-block;
+	padding-left: .2rem;
+	font-weight: 500;
+}
+
+.imgGrid-Loading>span:nth-child(2) {
+	animation-delay: .25s;
+}
+
+.imgGrid-Loading>span:nth-child(3) {
+	animation-delay: .5s;
+}
+
+@keyframes periodBounce {
+	0%, 50% {
+		transform: translateY(0);
+	}
+	25% {
+		transform: translateY(-.25rem);
+	}
+}
+
+/*Returnto
+====================*/
+
+.imgGrid-return {
+	padding: 1.5rem 0 .5rem 0;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	opacity: .8;
+}
+
+.imgGrid-return h3 {
+	font-style: italic;
+	text-align: center;
+	font-weight: 300;
+}
+
+.imgGrid-return a {
+	border: 1px solid var(--font-color);
+	border-radius: 1em;
+	margin-top: .5em;
+
+	color: var(--font-color);
+	text-decoration: none;
+	padding: .25em .5em;
+	opacity: .8;
+}
+
+.imgGrid-return a:hover, .imgGrid-return a:focus {
+	background-color: var(--font-color);
+	color: var(--body-color);
+	opacity: 1;
+}

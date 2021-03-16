@@ -1,0 +1,132 @@
+/*Image
+====================*/
+
+
+.modalImage {
+	font-family: Roboto, sans-serif;
+	background-color: rgba(0, 0, 0, .6);
+	display: grid;
+	place-items: center;
+	position: fixed;
+	height: 100vh;
+	width: 100vw;
+	left: 0;
+	top: 0;
+
+	z-index: 1000;
+}
+
+.modalImage-inner {
+	background-color: var(--body-interior-color);
+	border-radius: .5em;
+	padding: .2em 1em;
+}
+
+
+
+/*Topbar
+====================*/
+
+.modalImage-topbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: .8rem;
+}
+
+.modalImage-topbar a {
+	color: var(--font-color);
+	text-decoration: none;
+	font-weight: 400;
+	font-size: 1rem;
+	opacity: .8;
+	padding: 0;
+	margin: 0;
+}
+
+.modalImage-topbar a:hover span {
+	text-decoration: underline;
+}
+
+.modalImage-topbar button {
+	color: var(--font-color);
+	background: none;
+	font-size: 1.4rem;
+	display: block;
+	border: none;
+	padding:  0 0.25em;
+	margin: 0;
+}
+
+.modalImage-topbar button:hover, .modalImage-topbar button:focus {
+	color: var(--deny-color);
+	cursor: pointer;
+}
+
+/*Image
+====================*/
+
+.modalImage-imgholder {
+	display:grid;
+	place-items: center;
+	min-width: 50vw;
+
+	background-color: var(--body-color);
+	border-radius: .5rem;
+	overflow: hidden;
+	margin: 0 0 0 0;
+}
+
+.modalImage-imgholder img {
+	max-height: 75vh;
+	max-width: 75vw;
+	height: auto;
+	width: auto;
+}
+
+/*Bottombar
+====================*/
+
+.modalImage-titlebar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.modalImage-titlebar button {
+	color: var(--font-color);
+	font-size: 1rem;
+	opacity: .4;
+	background: none;
+	border: none;
+}
+
+.modalImage-titlebar button:hover, .modalImage-titlebar button:focus {
+	color: var(--deny-color);
+	cursor: pointer;
+	opacity: 1;
+}
+
+.modalImage-bottombar {
+	align-items: center;
+	padding: .5rem 0;
+}
+
+.modalImage-bottombar h2 {
+	font-size: 1.25rem;
+	font-weight: 400;
+}
+
+.modalImage-bottombar p {
+	font-size: 1rem;
+	font-weight: 300;
+	opacity: .8;
+}
+
+@media (min-width: 768px){
+	.modalImage-bottombar {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+}

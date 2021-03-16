@@ -1,0 +1,37 @@
+#pageHeader {
+	background-color: var(--body-color);
+	color: var(--font-color);
+}
+
+#pageHeader-inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0em 1em;
+	max-width: 768px;
+	margin: 0 auto;
+}
+
+#pageHeader a {
+	text-decoration: none;
+	padding: .25em .75em;
+	border-radius: 1em;
+
+	border: 1px solid var(--font-color);
+	color: var(--font-color);
+}
+
+#pageHeader .textlogo {
+	font-size: 1.8rem;
+}
+
+#pageHeader a:hover, #pageHeader a:focus {
+	background-color: var(--font-color);
+	color: var(--background-color);
+}
+
+@media (min-width: 768px) {
+	#pageHeader {
+		justify-content: space-around;
+	}
+}

@@ -1,0 +1,47 @@
+.App {
+	min-height: 100%;
+}
+
+.container {
+	background: var(--body-color);
+	border-radius: .5em;
+	max-width: 768px;
+	padding: 1em 1em;
+	margin: 1em;
+}
+
+.containerHeader {
+	opacity: 9;
+	font-weight: 400;
+	text-align: center;
+	padding-bottom: .5em;
+	position: relative;
+	margin: 0 auto;
+	background-color: var(--body-color);
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+	padding: 0;
+	margin: 0;
+}
+
+.stylized-btn {
+	border: 2px solid var(--body-color);
+	border-radius: 1em;
+	padding: .5em 3em;
+	margin: 2em auto;
+	background: none;
+
+	color: var(--font-color);
+	text-decoration: none;
+}
+
+.stylized-btn:hover, .stylized-btn:focus {
+	background-color: var(--body-color);
+}
+
+@media (min-width: 768px) {
+	.container {
+		margin: 1em auto;
+	}
+}

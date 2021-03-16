@@ -1,0 +1,205 @@
+/*Userpage
+====================*/
+
+#userpage {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+@media (min-width: 768px) {
+	#userpage {
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: flex-start;
+	}
+}
+
+
+/* userinfo
+====================*/
+
+.userInfo {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#userpage h2 {
+	font-size: 2em;
+}
+
+@media (min-width: 768px) {
+	.userInfo {
+		justify-content: space-between;
+		align-items: flex-start;
+		flex-direction: column;
+	}
+}
+
+
+/*Userinfo-holder
+====================*/
+
+.userinfo-holder {
+	display: flex;
+	flex-direction: row;
+	padding-top: .5em;
+	opacity: .6;
+}
+
+.userinfo-holder span {
+	padding: .25em .25em;
+}
+
+@media (min-width: 768px) {
+	.userinfo-holder {
+		flex-direction: column;
+		margin: 0 .5em;
+	}
+}
+
+
+/*Tokenholder
+====================*/
+
+
+#tokenholder {
+	--border-color: var(--font-color);
+	position: relative;
+	margin-top: 1.5em;
+}
+
+.tokenCopied {
+	--border-color: var(--confirm-color) !important;
+}
+
+#tokenholder p {
+	background-color: var(--body-color);
+	font-size: 1rem;
+
+	position: absolute;
+	padding: 0 .5em;
+	top: -.6em;
+	left: .5em;
+}
+
+#tokenholder button {
+	background-color: var(--body-color);
+	color: var(--border-color);
+
+	border: 1px solid var(--border-color);
+	border-radius: 0 1em 1em 0;
+
+	font-family: Raleway, sans-serif;
+	font-size: .9rem;
+	padding: .8em 1em;
+	cursor: pointer;
+}
+
+#tokenholder button:not(.no-hover):hover, #tokenholder button:not(.no-hover):focus {
+	background-color: var(--font-color);
+	color: var(--background-color);
+}
+
+#tokenholder input {
+	background-color: var(--body-color);
+	color: var(--font-color);
+
+	text-overflow: ellipsis;
+	font-size: .9rem;
+
+	border: 1px solid var(--border-color);
+	border-radius: 1em 0 0 1em;
+	border-right: 0;
+
+	padding: .8em .5em;
+}
+
+#tokenholder input:focus {
+	outline: none;
+}
+
+
+@media (min-width: 768px) {
+	#tokenholder {
+		margin: .8em .4em;
+	}
+
+	#tokenholder button {
+		margin-top: 0;
+	}
+}
+
+/* Notif
+====================*/
+
+.tokenholder-denied {
+	text-align: center;
+	margin-top: 1.5em;
+}
+
+/* Adminpanel
+====================*/
+.adminPanel-btns {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.adminPanel-btns a {
+	border: 1px solid var(--deny-color);
+	border-radius: .5em;
+	color: var(--font-color);
+	text-decoration: none;
+	padding: .5em 1em;
+}
+
+.adminPanel-btns a:hover {
+	background-color: var(--deny-color);
+	color: var(--background-color);
+}
+
+.adminPanel-btns a + a {
+	margin-left: 1em;
+}
+
+
+/*File Dropzone
+====================*/
+
+
+#drop_zone {
+	border: 5px dashed var(--body-interior-color);
+	text-align: center;
+	padding: 5em 0;
+}
+
+#drop_manual-label {
+	font-size: 1.5rem;
+	cursor: pointer;
+}
+
+#drop_manual-label span {
+	font-weight: bold;
+}
+
+#drop_manual-upload {
+	display: none;
+}
+
+#drop_manual-label:hover span {
+	text-decoration: underline;
+}
+
+.isOver {
+	background-color: var(--background-color);
+	margin: .5em !important;
+}
+
+.drop_error {
+	background-color: var(--deny-color);
+	animation-name: errorWiggle;
+	animation-duration: .5s;
+}

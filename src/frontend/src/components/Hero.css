@@ -1,0 +1,39 @@
+#hero {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100%;
+}
+
+#hero-center {
+	justify-content: center;
+	flex-direction: column;
+	display: flex;
+}
+
+#hero-center p {
+	text-align: center;
+	font-style: italic;
+	font-size: 1.2rem;
+	opacity: .7;
+}
+
+#hero .textlogo {
+	margin: 0em 0em .1em 0em;
+	padding-left: .2rem;
+	font-size: 4em;
+}
+
+#hero .textlogo span {
+	padding-right: .2rem;
+}
+
+@media (min-width: 768px) {
+	#hero .textlogo {
+		font-size: 6em;
+	}
+
+	#hero-center p {
+		font-size: 1.5em;
+	}
+}

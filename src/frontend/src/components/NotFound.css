@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+#notfound {
+	background: conic-gradient(from 90deg at 50% 0%, #111, 50%, #222, #111);
+	font-family: roboto, sans-serif;
+	text-align: center;
+	display: grid;
+	place-items: center;
+	height: 100vh;
+	width: 100vw;
+}
+
+#notfound h2 {
+	background: conic-gradient(at 125% 50%, #b78cf7, #ff7c94, #ffcf0d, #ff7c94, #b78cf7);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	user-select: none;
+
+	font-size: 10rem;
+	font-weight: 100;
+}
+
+#notfound span + span {
+	padding-left: 3rem;
+}
+
+#notfound-inner a {
+	margin-top: 2rem;
+	display: block;
+	width: 10em;
+}
+
+
+#notfound #flicker {
+	transform: rotate(-15deg) translate(-.4rem, .3rem);
+	display: inline-block;
+
+	animation-name: flicker;
+	animation-timing-function: steps(1, end);
+	animation-iteration-count: infinite;
+	animation-duration: 5s;
+	transition: none;
+}
+
+@keyframes flicker {
+	0%, 21%, 23%, 25%, 50%, 75%, 77% {
+		background: none;
+		color: white;
+	}
+	1%, 22%, 24%, 26%, 54%, 76%, 78% {
+		background: inherit;
+		color: transparent;
+	}
+}
