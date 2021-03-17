@@ -128,7 +128,7 @@
 	font-weight: 300;
 }
 
-.imgGrid-return a {
+.imgGrid-return button {
 	border: 1px solid var(--font-color);
 	border-radius: 1em;
 	margin-top: .5em;
@@ -139,7 +139,7 @@
 	opacity: .8;
 }
 
-.imgGrid-return a:hover, .imgGrid-return a:focus {
+.imgGrid-return button:hover, .imgGrid-return button:focus {
 	background-color: var(--font-color);
 	color: var(--body-color);
 	opacity: 1;

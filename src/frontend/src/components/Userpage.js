@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {useParams} from 'react-router-dom';
 import * as globals from '../globals.js';
 import './Userpage.css'
@@ -22,8 +22,10 @@ function FileDropzone(props) {
 
 			let req = new XMLHttpRequest();
 
+			// TODO: MAKE LESS JANK
+			// eslint-disable-next-line
 			req.onreadystatechange = function() {
-				if (req.readyState == XMLHttpRequest.DONE) {
+				if (req.readyState === XMLHttpRequest.DONE) {
 					let uploadResponse = JSON.parse(req.responseText);
 					if(!uploadResponse.hasOwnProperty("err")){
 						uploadResponse.justUploaded = globals.getCurrentTime(1000);
@@ -35,7 +37,7 @@ function FileDropzone(props) {
 					setUploadCount({total: fileTotal, count: fileTotal - fileCount});
 				}
 
-				if(fileCount == 0){
+				if(fileCount === 0){
 					setUploadCount({total: 0, count: 0});
 				}
 			}
@@ -51,32 +53,32 @@ function FileDropzone(props) {
 	let manualUpload = (e) => {
 		let files = e.target.files;
 		e.preventDefault();
-		if(uploadCount.total != 0 || files.length == 0) return;
+		if(uploadCount.total !== 0 || files.length === 0) return;
 		uploadFiles(files);
 	}
 
 	let dragOverHandler = (e) => {
 		e.preventDefault();
-		if(uploadCount.total != 0) return;
+		if(uploadCount.total !== 0) return;
 		e.currentTarget.classList.add("isOver");
 	}
 
 	let dragLeaveHandler = (e) => {
 		e.preventDefault();
-		if(uploadCount.total != 0) return;
+		if(uploadCount.total !== 0) return;
 		e.currentTarget.classList.remove("isOver");
 	}
 
 	let dropHandler = async (e) => {
 		e.preventDefault();
-		if(uploadCount.total != 0) return;
+		if(uploadCount.total !== 0) return;
 
 		if(e.dataTransfer.items) {
 			uploadFiles(e.dataTransfer.files);
 		}
 	}
 
-	let isUploading = uploadCount.total != 0;
+	let isUploading = uploadCount.total !== 0;
 	return (<div id="drop_outer" className="container">
 		<div id="drop_zone" className={isUploading ? "isOver" : ""} onDrop={dropHandler} onDragOver={dragOverHandler} onDragLeave={dragLeaveHandler}>
 			<label htmlFor={!isUploading ? "drop_manual-upload" : ""} id="drop_manual-label">{isUploading ? `Uploading files ${uploadCount.count} of ${uploadCount.total}` : (<><span>Choose a file</span> or drag it here.</>)}</label>
@@ -136,8 +138,8 @@ function AdminPanel(props) {
 		<div id="adminPanel" className="container">
 			<h2 className="containerHeader">Admin Panel</h2>
 			<div className="adminPanel-btns">
-				{!targetUser.isUserApproved && <a href="" onClick={(e) => allowUser(e, "TOGGLE_APPROVAL")}>Allow user to upload</a>}
-				<a href="" onClick={(e) => allowUser(e, "BAN_USER")}>{targetUser.isUserBanned ? "Unban User" : "Ban User"}</a>
+				{!targetUser.isUserApproved && <button onClick={(e) => allowUser(e, "TOGGLE_APPROVAL")}>Allow user to upload</button>}
+				<button href="" onClick={(e) => allowUser(e, "BAN_USER")}>{targetUser.isUserBanned ? "Unban User" : "Ban User"}</button>
 			</div>
 		</div>
 	)
@@ -150,16 +152,18 @@ export default function Userpage(props) {
 	let {userid} = useParams();
 
 	useEffect(() => {
-		if(userid == "me") return setThisUser(currentUser);
+		if(userid === "me") return setThisUser(currentUser);
 		fetch("/api/users/"+userid).then(async (rawData) => {
 			let data = await rawData.json();
 			setThisUser(data);
 		})
+
+	// eslint-disable-next-line
 	}, [currentUser])
 
 	useEffect(() => {
 		const url = new URL(window.location);
-		if(thisUser.hasOwnProperty("id") && url.pathname == '/user/me'){
+		if(thisUser.hasOwnProperty("id") && url.pathname === '/user/me'){
 			url.pathname = `/user/${thisUser.id}`;
 			window.history.replaceState({}, '', url);
 		}

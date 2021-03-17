@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useEffect } from 'react';
 import * as globals from '../globals.js';
 import {Link} from 'react-router-dom';
 import './ModalImage.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes, faUser, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 export default function ModalImage(props) {
 	let imgData = props.ImgData;
@@ -20,7 +20,7 @@ export default function ModalImage(props) {
 	}
 
 	let escFunc = ((e) => {
-		if(e.keyCode == 27){
+		if(e.keyCode === 27){
 			closeModal(e);
 		}
 	})
@@ -38,6 +38,8 @@ export default function ModalImage(props) {
 			url.searchParams.delete('image');
 			window.history.replaceState({}, '', url);
 		}
+
+	// eslint-disable-next-line
 	},[])
 
 
@@ -53,7 +55,7 @@ export default function ModalImage(props) {
 				</div>
 
 				<div className="modalImage-imgholder">
-					<img src={"/" + imgData.fileName}></img>
+					<img src={"/" + imgData.fileName} alt=""></img>
 				</div>
 
 				<div className="modalImage-bottombar">
@@ -61,7 +63,7 @@ export default function ModalImage(props) {
 						<h2 tabIndex="3">{globals.sanitize(fileName[1])}</h2>
 						{imgData.canDelete && <button onClick={deleteFile} tabIndex="4"><FontAwesomeIcon icon={faTrashAlt} /></button>}
 					</div>
-					<p tabIndex="5">{imgData.views} View{imgData.views != 1 ? "s" : ""}</p>
+					<p tabIndex="5">{imgData.views} View{imgData.views !== 1 ? "s" : ""}</p>
 
 				</div>
 			</div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import * as globals from '../globals.js';
 import {Link} from 'react-router-dom';
 import Textlogo from './Textlogo';

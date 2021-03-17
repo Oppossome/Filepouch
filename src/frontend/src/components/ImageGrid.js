@@ -15,7 +15,7 @@ function ImageObject(props) {
 
 	let postDate = globals.makeDateGood(imgData.date);
 	let fileName = imgData.fileName.match(/^\w{7}(.*)$/)
-	let doAnim = imgData.justUploaded == globals.getCurrentTime(1000);
+	let doAnim = imgData.justUploaded === globals.getCurrentTime(1000);
 	return (<div onClick={displayFile} className={doAnim ? "image-entry entry-popin" : "image-entry"}>
 		<div style={{"backgroundImage": "url('/"+imgData.fileName+"')"}} className="img" />
 		<h3>{globals.sanitize(fileName[1])}</h3>
@@ -42,14 +42,14 @@ export default function ImageGrid(props) {
 		fetch("/api/files/"+fileName, {method: 'DELETE'}).then(async (rawData) => {
 			let data = await rawData.json();
 			if( !data.hasOwnProperty("err") ) {
-				setGridImages(gridImages.filter((file) => file.fileName != fileName));
+				setGridImages(gridImages.filter((file) => file.fileName !== fileName));
 				setSelectedImage(null);
 			}
 		})
 	}
 
 	let handleScroll = (e) => {
-		if(isLoading || currentPage == -1) return;
+		if(isLoading || currentPage === -1) return;
 		let scrollFromBottom = document.body.scrollHeight - (document.documentElement.scrollTop + window.innerHeight);
 		if(scrollFromBottom < 10) {
 			setCurrentPage(currentPage + 1);
@@ -57,13 +57,13 @@ export default function ImageGrid(props) {
 	}
 
 	useEffect(() => {
-		if(currentPage == -1) return;
+		if(currentPage === -1) return;
 		setIsLoading(true);
 
 		fetch(`${props.Endpoint}/${currentPage}`).then(async (rawData) => {
 			let data = await rawData.json();
 			if(!data.hasOwnProperty("err")){
-				if(data.length != 20) setCurrentPage(-1);
+				if(data.length !== 20) setCurrentPage(-1);
 				setGridImages([...gridImages, ...data]);
 				setIsLoading(false);
 			} else {
@@ -78,6 +78,7 @@ export default function ImageGrid(props) {
 
 		})
 
+	// eslint-disable-next-line
 	}, [currentPage])
 
 	useEffect(() => {
@@ -91,17 +92,17 @@ export default function ImageGrid(props) {
 	return (<div id="user-images" className="container">
 		{selectedImage && <ModalImage ImgData={selectedImage} DeleteFile={deleteFile} SetSelectedImage={setSelectedImage}/>}
 
-		<h2 className="containerHeader">{currentError == "" ? props.Title : currentError}</h2>
+		<h2 className="containerHeader">{currentError === "" ? props.Title : currentError}</h2>
 		<div className="images">
 			{gridImages.map((img, ind) => (
 				<ImageObject key={ind} ImgData={img} displayFile={displayFile} />
 			))}
 		</div>
 
-		{(currentPage == -1 && gridImages.length >= 16) &&
+		{(currentPage === -1 && gridImages.length >= 16) &&
 			<div className="imgGrid-return">
 				<h3>... and then there were none</h3>
-				<a href="#" onClick={() => {window.scrollTo(0, 0)}}>return to top</a>
+				<button onClick={() => {window.scrollTo(0, 0)}}>return to top</button>
 			</div>
 		}
 

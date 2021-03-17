@@ -148,7 +148,7 @@
 	justify-content: center;
 }
 
-.adminPanel-btns a {
+.adminPanel-btns button {
 	border: 1px solid var(--deny-color);
 	border-radius: .5em;
 	color: var(--font-color);
@@ -156,12 +156,12 @@
 	padding: .5em 1em;
 }
 
-.adminPanel-btns a:hover {
+.adminPanel-btns button:hover {
 	background-color: var(--deny-color);
 	color: var(--background-color);
 }
 
-.adminPanel-btns a + a {
+.adminPanel-btns button + button {
 	margin-left: 1em;
 }
 
