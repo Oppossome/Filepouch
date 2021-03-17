@@ -40,3 +40,4 @@ jobs:
         uses: actions-go/push@v1
         with:
           author-name: react-builder
+          commit-message: update frontend files
