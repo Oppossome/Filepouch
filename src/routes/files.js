@@ -1,3 +1,4 @@
+const normalize = require('normalize-path');
 const util = require('../util.js');
 const db = require('../db.js');
 const path = require('path');
@@ -12,7 +13,7 @@ const router = express.Router();
 
 let storage = multer.diskStorage({
 	destination: function(req, file, cb) {
-		cb(null, './uploads/')
+		cb(null, normalize('./uploads/'))
 	},
 	filename: function(req, file, cb) {
 		cb(null, util.randStr(6) + "_" + db.sanitize(file.originalname));
