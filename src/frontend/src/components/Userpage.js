@@ -94,17 +94,10 @@ function TokenHolder(props) {
 
 	let doCopy = (e) => {
 		e.preventDefault();
-		navigator.clipboard.writeText(props.userToken).then(() => {
+		navigator.clipboard.writeText(props.User.uploadToken).then(() => {
 			setTimeout(() => { setIsCopied(false);}, 3000);
 			setIsCopied(true);
-
-		}, function() {
-			tokenInput.current.select();
-			document.execCommand("copy");
-			setTimeout(() => { setIsCopied(false);}, 3000);
-			setIsCopied(true);
-
-		})
+		});
 	}
 
 	if(props.User.isUserApproved){
