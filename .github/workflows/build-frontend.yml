@@ -33,6 +33,12 @@ jobs:
         run: |
           npm ci
           npm run build
-      
-      - name: Push changes
-        uses: ad-m/github-push-action@v0.6.0
+          
+          
+      - name: Push Changes
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "Build frontend"
+          git push
