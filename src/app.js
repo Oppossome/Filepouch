@@ -27,21 +27,18 @@ app.use('/auth/', require('./routes/auth.js'));
 /* FALLBACK ROUTER
 ====================*/
 const fileFallback = path.join(__dirname+"/frontend/build", "index.html");
+const fileMatch = /^[A-Z0-9]{6}_.+$/i
 const db = require('./db.js');
 const fs = require('fs');
 
-
-let fileMatch = /^[A-Z0-9]{6}_.+$/i
 app.get('*', (req, res) => {
-	let realPath = req.path.substring(1);
-	if(realPath.length == 0) realPath = "index.html";
+	let realPath = (req.path.length > 1 ? req.path.substring(1) : "index.html");
 	let safePath = realPath.replace(/^(\.\.(\/|\\|$))+/, '');
-	let isFile = fileMatch.test(safePath);
 
-	if(isFile){
+	if(fileMatch.test(safePath)){
 		db.File.findOne({fileName: db.sanitize(safePath)}).populate('postedBy').then((file) => {
 			if(!file) return res.sendFile(fileFallback);
-			if(!req.user || !req.user._id.equals(file.postedBy._id)){
+			if(!req.user || !req.user._id.equals(file.postedBy._id)) {
 				file.views++;
 				file.save();
 			}
@@ -54,7 +51,7 @@ app.get('*', (req, res) => {
 		})
 
 	} else {
-		let filePath = path.join(__dirname+"/frontend/build", safePath);
+		let filePath = path.join(__dirname + "/frontend/build", safePath);
 		let fileToSend = (fs.existsSync(filePath) ? filePath : fileFallback);
 		res.sendFile(fileToSend);
 	}
