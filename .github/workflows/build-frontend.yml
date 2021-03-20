@@ -31,6 +31,7 @@ jobs:
       - name: Build files
         working-directory: ./src/frontend/
         run: |
+          rm -rf ./build/static/*
           npm ci
           npm run build
           
