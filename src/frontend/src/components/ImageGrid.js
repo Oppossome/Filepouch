@@ -8,7 +8,6 @@ import { faEye, faCalendar } from '@fortawesome/free-solid-svg-icons'
 
 function ImageObject(props) {
 	let imgData = props.ImgData;
-	console.log(imgData); //Test!!
 
 	let displayFile = () => {
 		props.displayFile(imgData);
